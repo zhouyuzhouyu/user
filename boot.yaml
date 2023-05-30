@@ -1,0 +1,45 @@
+# boot.yaml
+app:
+  name: zy-apilabs
+  version: "v1.0.0"
+
+gin:
+  - name: zy-apilabs
+    port: 8080
+    enabled: true
+    commonService:
+      enabled: true
+    # sw:
+    #   enabled: true
+    # docs:
+    #   enabled: true
+    # prom:
+    #   enabled: true
+    middleware:
+      logging:
+        enabled: true
+        encoding: json
+      # prom:
+      #   enabled: true
+
+#redis:
+#  - name: redis
+#    enabled: true
+#    addrs: ["47.236.18.254:6379"]
+#    db: 2
+
+mysql:
+  - name: user-db                     # Required
+    enabled: true                     # Required
+    domain: "*"                       # Optional
+    addr: "47.236.18.254:3306"            # Optional, default: localhost:3306
+    user: sql_zoyu                        # Optional, default: root
+    pass: qweasd123                        # Optional, default: pass
+    database:
+      - name: sql_zoyu                    # Required
+    logger:
+      level: info
+      encoding: json
+      outputPaths: [ "stdout", "log/db.log" ]
+      slowThresholdMs: 5000
+      ignoreRecordNotFoundError: false
